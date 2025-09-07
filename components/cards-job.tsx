@@ -7,6 +7,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { ArrowBigRight } from "lucide-react"
+import Link from "next/link"
+import { Button } from "./ui/button"
 
 type JobProps = {
   ID: number
@@ -29,18 +32,25 @@ const CardsJob = ({ jobs }: CardJobProps) => {
       {jobs.map((job) => (
         <Card key={job.ID}>
           <CardHeader>
-            <CardTitle>{job.PositionName}</CardTitle>
-            <CardDescription>{job.JobDescription}</CardDescription>
-            <CardAction>Card Action</CardAction>
+            <CardTitle className='text-xl font-bold'>{job.PositionName}</CardTitle>
+            
+            
           </CardHeader>
           <CardContent>
             <p>{job.JobType}</p>
             <p>{job.Salary}</p>
             <p>{job.Location}</p>
           </CardContent>
-          <CardFooter>
+          <CardFooter className="relative flex flex-col gap-4">
+            <div className='w-full flex items-center justify-start gap-2 '>
             <p>{job.Published}</p>
             <p>{job.WhoPublished}</p>
+
+
+            </div>
+           <Button asChild variant="link" className="w-full text-blue-500">
+              <Link href={`/jobs/${job.ID}`} className="flex items-center gap-2   hover:underline transition-all duration-300 delay-200   ">View Details<ArrowBigRight/></Link>
+           </Button>
           </CardFooter>
         </Card>
       ))}
