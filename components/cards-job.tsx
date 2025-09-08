@@ -26,11 +26,18 @@ type CardJobProps = {
   jobs: JobProps[]
 }
 
-const CardsJob = ({ jobs }: CardJobProps) => {
+const CardsJob = ({ jobs, name }: { jobs: JobProps[]; name: string }) => {
   return (
     <>
-      {jobs.map((job) => (
-        <Card key={job.ID}>
+      {jobs
+      .filter((item) =>
+            name
+              ? item.PositionName.toLowerCase().includes(name.toLowerCase()) 
+                
+              : true
+          )
+      .map((job) => (
+        <Card key={job.ID} className=''>
           <CardHeader>
             <CardTitle className='text-xl font-bold'>{job.PositionName}</CardTitle>
             

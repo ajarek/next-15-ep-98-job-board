@@ -109,7 +109,7 @@ export default function HeroSection() {
                     size='lg'
                     className='rounded-xl px-5 text-base '
                   >
-                    <Link href='/recipes'>
+                    <Link href='/jobs'>
                       <span className='text-nowrap'>Browse Jobs</span>
                     </Link>
                   </Button>
