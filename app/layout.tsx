@@ -4,6 +4,7 @@ import "./globals.css";
 import { HeroHeader } from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner"
+import ProvidersSession from "@/components/providers-session";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,10 +37,12 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-        <HeroHeader/>
-        {children}
-        <Toaster />
-        </ThemeProvider>
+            <ProvidersSession>
+              <HeroHeader />
+              {children}
+              <Toaster />
+            </ProvidersSession>
+          </ThemeProvider>
       </body>
     </html>
   );
