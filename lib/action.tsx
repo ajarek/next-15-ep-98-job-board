@@ -1,7 +1,7 @@
 'use server'
 
 import connectToDb from './connectToDb'
-import {  User } from './models'
+import {  User, Jobs } from './models'
 import { revalidatePath } from 'next/cache'
 import bcrypt from 'bcryptjs'
 import { redirect } from 'next/navigation'
@@ -105,3 +105,16 @@ export const resetPassword = async (formData: FormData) => {
   }
 }
 
+
+export const getJobs = async () => {
+  try {
+    await connectToDb()
+    const jobs = await Jobs.find()
+    console.log(jobs)
+    return { jobs }
+  } catch (err) {
+    return { message: 'Failed to get jobs' + err }
+  }
+}
+
+ 

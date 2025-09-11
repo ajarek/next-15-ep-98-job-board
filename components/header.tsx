@@ -8,6 +8,11 @@ import ModeToggle from './mode-toggle'
 import { useSession } from 'next-auth/react'
 import { signOut } from 'next-auth/react'
 import Image from 'next/image'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 
 const menuItems = [
   { name: 'Browse Jobs', href: '/jobs' },
@@ -20,7 +25,7 @@ export const HeroHeader = () => {
   const { data: session, status } = useSession()
   const [menuState, setMenuState] = React.useState(false)
   const [isScrolled, setIsScrolled] = React.useState(false)
-  console.log(session)
+
   React.useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
@@ -95,13 +100,21 @@ export const HeroHeader = () => {
               <div className='flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit'>
                 {session?.user ? (
                   <div className='flex items-center gap-2'>
-                    <Image
-                      src={session.user.image || ''}
-                      alt={session.user.name || ''}
-                      width={40}
-                      height={40}
-                      className='rounded-full'
-                    />
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <Image
+                          src={session.user.image || ''}
+                          alt={session.user.name || ''}
+                          width={40}
+                          height={40}
+                          className='rounded-full'
+                        />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{session.user.name || ''}</p>
+                      </TooltipContent>
+                    </Tooltip>
+
                     <Button
                       variant={'destructive'}
                       onClick={() => signOut()}
