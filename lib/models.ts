@@ -10,7 +10,7 @@ export type User = {
 }
 
 export type Jobs = {
- _id: number,
+ _id?: number,
   PositionName: string,
   JobType: string,
   Salary: string,

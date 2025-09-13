@@ -21,7 +21,7 @@ const Dashboard = async () => {
     redirect('/login');
   }
   const jobsResult = await getJobs();
-  console.log(jobsResult);
+ 
 
   return (
     <div className='min-h-screen flex flex-col items-center justify-center py-24 px-4 sm:px-8 lg:px-24 '>

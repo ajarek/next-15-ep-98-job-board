@@ -1,7 +1,7 @@
 'use server'
 
 import connectToDb from './connectToDb'
-import {  User, Jobs } from './models'
+import { User, Jobs } from './models'
 import { revalidatePath } from 'next/cache'
 import bcrypt from 'bcryptjs'
 import { redirect } from 'next/navigation'
@@ -39,7 +39,7 @@ export const deleteUser = async (formData: FormData) => {
     console.log({ message: `Deleted user ${id}` })
     return { message: `Deleted user ${id}` }
   } catch (err) {
-    return { message: 'Failed to delete user' + err }
+    return { message: `Failed to delete user ${err}` }
   }
 }
 
@@ -66,7 +66,7 @@ export const updateUser = async (formData: FormData) => {
     revalidatePath('/dashboard')
     return { message: `Updated user ${_id}` }
   } catch (err) {
-    return { message: 'Failed to update to db' + err }
+    return { message: `Failed to update to db ${err}` }
   } finally {
     // await signOut()
     redirect('/')
@@ -105,16 +105,49 @@ export const resetPassword = async (formData: FormData) => {
   }
 }
 
-
 export const getJobs = async () => {
   try {
     await connectToDb()
     const jobs = await Jobs.find()
-    console.log(jobs)
     return { jobs }
   } catch (err) {
-    return { message: 'Failed to get jobs' + err }
+    return { message: `Failed to get jobs ${err}` }
   }
 }
 
+export const getJobById = async (id: string) => {
+  try {
+    await connectToDb()
+    const job = await Jobs.findById(id)
+    return { job }
+  } catch (err) {
+    return { message: `Failed to get job by id ${err}` }
+  }
+}
+
+
+export const postJob = async (formData: Jobs) => {
+  const {PositionName, JobType, Salary, JobDescription, Location,Published, WhoPublished} = formData
  
+
+  try {
+    await connectToDb()
+    const newJob = new Jobs({
+      PositionName,
+      JobType,
+      Salary,
+      JobDescription,
+      Location,
+      Published,
+      WhoPublished,
+    })
+    console.log(newJob)
+    await newJob.save()
+    
+    revalidatePath('/')
+    return { status: 200 }
+  }
+  catch (err) {
+    console.log(err)
+  }
+}

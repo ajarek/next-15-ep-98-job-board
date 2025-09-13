@@ -6,7 +6,7 @@ export default auth((req) => {
   const isLoggedIn = !!req.auth
 
   // Chronione ścieżki
-  const protectedPaths = ['/dashboard']
+  const protectedPaths = ['/dashboard', '/post-job']
   const isProtectedPath = protectedPaths.some((path) =>
     nextUrl.pathname.startsWith(path)
   )

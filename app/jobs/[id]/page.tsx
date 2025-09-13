@@ -1,10 +1,11 @@
 import ButtonApply from '@/components/button-apply'
-import Jobs from '@/data/jobs.json'
+import {getJobById} from '@/lib/action'
 import * as motion from 'motion/react-client'
 
-const JobDetails = async ({ params }: { params: Promise<{ id: string }> }) => {
-  const { id } = await params
-  const job = Jobs.find((job) => job.ID === +id)
+const JobDetails = async ({ params }: { params: { id: string } }) => {
+  const { id } = params
+  const jobResult = await getJobById(id)
+  const job = 'job' in jobResult ? jobResult.job : null
 
   if (!job) {
     return (
@@ -32,8 +33,8 @@ const JobDetails = async ({ params }: { params: Promise<{ id: string }> }) => {
         <p>{job.JobDescription}</p>
         <div className='flex items-center justify-between gap-2'>
 
-        <p>{job.Published}</p>
-        <p>Posted by {job.WhoPublished}</p>
+        <p>Published: {job.Published.toLocaleDateString("pl-PL")}</p>
+        <p>Posted by: {job.WhoPublished}</p>
 
         </div>
      <ButtonApply />

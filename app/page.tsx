@@ -1,13 +1,15 @@
 import CardsJob from '@/components/cards-job'
 import HeroSection from '@/components/hero-section'
 import { Button } from '@/components/ui/button'
-import Jobs from '@/data/jobs.json'
+import { getJobs } from '@/lib/action';
 import { ArrowBigRight } from 'lucide-react'
 
 import * as motion from 'motion/react-client'
 import Link from 'next/link'
-export default function Home() {
-  const jobsFilter = Jobs.filter((job) => job.ID <= 3)
+export default async function Home() {
+  const jobsResult = await getJobs();
+    const Jobs = 'jobs' in jobsResult && Array.isArray(jobsResult.jobs) ? jobsResult.jobs : [];
+  const jobsFilter = Jobs.slice(0, 6)
   return (
     <main className='flex min-h-screen flex-col items-center justify-center p-24'>
       <HeroSection />
