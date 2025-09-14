@@ -2,8 +2,8 @@ import ButtonApply from '@/components/button-apply'
 import {getJobById} from '@/lib/action'
 import * as motion from 'motion/react-client'
 
-const JobDetails = async ({ params }: { params: { id: string } }) => {
-  const { id } = params
+const JobDetails = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params
   const jobResult = await getJobById(id)
   const job = 'job' in jobResult ? jobResult.job : null
 

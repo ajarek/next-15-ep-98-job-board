@@ -151,3 +151,18 @@ export const postJob = async (formData: Jobs) => {
     console.log(err)
   }
 }
+
+export const deleteJob = async (formData: FormData) => {
+  const id = formData.get('_id')
+
+  try {
+    await connectToDb()
+    await Jobs.findOneAndDelete({ _id: id })
+    
+    revalidatePath('/dashboard')
+    console.log({ message: `Deleted job ${id}` })
+    return { message: `Deleted job ${id}` }
+  } catch (err) {
+    return { message: `Failed to delete job ${err}` }
+  }
+}

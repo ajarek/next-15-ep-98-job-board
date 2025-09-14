@@ -1,6 +1,6 @@
-import { auth } from '@/app/api/auth/auth';
-import { getJobs } from '@/lib/action';
-import { redirect } from 'next/navigation';
+import { auth } from '@/app/api/auth/auth'
+import { getJobs } from '@/lib/action'
+import { redirect } from 'next/navigation'
 import {
   Card,
   CardAction,
@@ -9,50 +9,68 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { ArrowBigRight } from "lucide-react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+} from '@/components/ui/card'
+import { ArrowBigRight } from 'lucide-react'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import DeleteJob from '@/components/delete-job'
 
 const Dashboard = async () => {
-  const session = await auth();
+  const session = await auth()
 
   if (!session) {
-    redirect('/login');
+    redirect('/login')
   }
-  const jobsResult = await getJobs();
- 
+  const jobsResult = await getJobs()
 
   return (
     <div className='min-h-screen flex flex-col items-center justify-center py-24 px-4 sm:px-8 lg:px-24 '>
       <h1 className='text-2xl font-bold'>Dashboard</h1>
       <div className='w-full  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-4  '>
         {jobsResult.jobs && Array.isArray(jobsResult.jobs) ? (
-          jobsResult.jobs.map((job) => (
-            <Card key={job._id} className=''>
-                      <CardHeader>
-                        <CardTitle className='text-xl font-bold'>{job.PositionName}</CardTitle>
-                        
-                        
-                      </CardHeader>
-                      <CardContent>
-                        <p>{job.JobType}</p>
-                        <p>{job.Salary}</p>
-                        <p>{job.Location}</p>
-                      </CardContent>
-                      <CardFooter className="relative flex flex-col gap-4">
-                        <div className='w-full flex items-center justify-start gap-2 '>
-                        <p>{job.Published.toLocaleDateString("pl-PL")}</p>
-                        <p>{job.WhoPublished}</p>
-            
-            
-                        </div>
-                       <Button asChild variant="link" className="w-full text-blue-500">
-                          <Link href={`/jobs/${job._id}`} className="flex items-center gap-2   hover:underline transition-all duration-300 delay-200   ">View Details<ArrowBigRight/></Link>
-                       </Button>
-                      </CardFooter>
-                    </Card>
-          ))
+          jobsResult.jobs
+            .filter(
+              (job) => job.WhoPublished === session.user?.name
+            )
+            .map((job) => (
+              <Card
+                key={job._id}
+                className=''
+              >
+                <CardHeader>
+                    <div className='flex items-center justify-between'>
+                  <CardTitle className='text-xl font-bold'>
+                    {job.PositionName}
+                  </CardTitle>
+                    <DeleteJob jobId={job._id.toString()} />
+                    </div>
+                </CardHeader>
+                <CardContent>
+                  <p>{job.JobType}</p>
+                  <p>{job.Salary}</p>
+                  <p>{job.Location}</p>
+                </CardContent>
+                <CardFooter className='relative flex flex-col gap-4'>
+                  <div className='w-full flex items-center justify-start gap-2 '>
+                    <p>{job.Published.toLocaleDateString('pl-PL')}</p>
+                    <p>{job.WhoPublished}</p>
+                  </div>
+                  <Button
+                    asChild
+                    variant='link'
+                    className='w-full text-blue-500'
+                  >
+                    <Link
+                      href={`/jobs/${job._id}`}
+                      className='flex items-center gap-2   hover:underline transition-all duration-300 delay-200   '
+                    >
+                      View Details
+                      <ArrowBigRight />
+                    </Link>
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))
         ) : (
           <li className='py-2 text-red-500'>
             {jobsResult.message || 'No jobs found.'}
