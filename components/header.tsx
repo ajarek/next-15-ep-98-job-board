@@ -1,4 +1,5 @@
 'use client'
+
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -13,6 +14,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
+import { Logo } from './logo'
 
 const menuItems = [
   { name: 'Browse Jobs', href: '/jobs' },
@@ -53,7 +55,7 @@ export const HeroHeader = () => {
                 aria-label='home'
                 className='text-xl flex items-center gap-2 font-bold '
               >
-                <span className='pb-2 text-2xl'> &#128188;</span>
+                <Logo/>
                 <h1 className=''>Job Board</h1>
               </Link>
 
@@ -69,7 +71,9 @@ export const HeroHeader = () => {
 
             <div className='absolute inset-0 m-auto hidden size-fit lg:block'>
               <ul className='flex gap-8 text-sm'>
-                {menuItems.map((item) => (
+                {menuItems
+                .filter((item) =>!session?.user ? item.name !== 'Post a Job' && item.name !== 'Dashboard' : true)
+                .map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}

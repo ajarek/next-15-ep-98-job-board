@@ -55,7 +55,7 @@ const CardsJob = ({ jobs, name }: { jobs: JobProps[]; name: string }) => {
 
               </div>
              <Button asChild variant="link" className="w-full text-blue-500">
-                <Link href={`/jobs/${job._id}`} className="flex items-center gap-2   hover:underline transition-all duration-300 delay-200   ">View Details<ArrowBigRight/></Link>
+                <Link href={`/job/${job._id}`} className="flex items-center gap-2   hover:underline transition-all duration-300 delay-200   ">View Details<ArrowBigRight/></Link>
              </Button>
             </CardFooter>
           </Card>

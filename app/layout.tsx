@@ -5,6 +5,7 @@ import { HeroHeader } from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner"
 import ProvidersSession from "@/components/providers-session";
+import FooterSection from "@/components/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,6 +41,7 @@ export default function RootLayout({
             <ProvidersSession>
               <HeroHeader />
               {children}
+              <FooterSection />
               <Toaster />
             </ProvidersSession>
           </ThemeProvider>

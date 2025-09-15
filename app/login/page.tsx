@@ -1,6 +1,5 @@
 import LoginForm from '@/components/Login-form'
 import SignInGithub from '@/components/sign-in-github'
-import React from 'react'
 import { auth } from '@/app/api/auth/auth'
 import { redirect } from 'next/navigation'
 import SignInGoogle from '@/components/sign-in-google'

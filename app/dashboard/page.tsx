@@ -61,7 +61,7 @@ const Dashboard = async () => {
                     className='w-full text-blue-500'
                   >
                     <Link
-                      href={`/jobs/${job._id}`}
+                      href={`/job/${job._id}`}
                       className='flex items-center gap-2   hover:underline transition-all duration-300 delay-200   '
                     >
                       View Details
