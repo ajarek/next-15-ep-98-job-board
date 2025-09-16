@@ -15,6 +15,15 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import { Logo } from './logo'
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarTrigger,
+} from '@/components/ui/menubar'
 
 const menuItems = [
   { name: 'Browse Jobs', href: '/jobs' },
@@ -55,7 +64,7 @@ export const HeroHeader = () => {
                 aria-label='home'
                 className='text-xl flex items-center gap-2 font-bold '
               >
-                <Logo/>
+                <Logo />
                 <h1 className=''>Job Board</h1>
               </Link>
 
@@ -72,17 +81,21 @@ export const HeroHeader = () => {
             <div className='absolute inset-0 m-auto hidden size-fit lg:block'>
               <ul className='flex gap-8 text-sm'>
                 {menuItems
-                .filter((item) =>!session?.user ? item.name !== 'Post a Job' && item.name !== 'Dashboard' : true)
-                .map((item) => (
-                  <li key={item.name}>
-                    <Link
-                      href={item.href}
-                      className='text-muted-foreground hover:text-accent-foreground block duration-150'
-                    >
-                      <span>{item.name}</span>
-                    </Link>
-                  </li>
-                ))}
+                  .filter((item) =>
+                    !session?.user
+                      ? item.name !== 'Post a Job' && item.name !== 'Dashboard'
+                      : true
+                  )
+                  .map((item) => (
+                    <li key={item.name}>
+                      <Link
+                        href={item.href}
+                        className='text-muted-foreground hover:text-accent-foreground block duration-150'
+                      >
+                        <span>{item.name}</span>
+                      </Link>
+                    </li>
+                  ))}
               </ul>
             </div>
 
@@ -101,65 +114,88 @@ export const HeroHeader = () => {
                   ))}
                 </ul>
               </div>
-              <div className='flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit'>
-                {session?.user ? (
-                  <div className='flex items-center gap-2'>
-                    <Tooltip>
-                      <TooltipTrigger>
-                        <Image
-                          src={session.user.image || ''}
-                          alt={session.user.name || ''}
-                          width={40}
-                          height={40}
-                          className='rounded-full'
-                        />
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>{session.user.name || ''}</p>
-                      </TooltipContent>
-                    </Tooltip>
+              <Menubar>
+                <MenubarMenu>
+                  <MenubarTrigger onClick={() => signOut()}>
+                    {session?.user ? (
+                      <div className='flex items-center gap-2'>
+                        
+                        <Tooltip>
+                          <TooltipTrigger>
+                            <Image
+                              src={
+                                session?.user?.image ||
+                                'https://randomuser.me/api/portraits/men/62.jpg'
+                              }
+                              alt={session?.user?.name || 'login'}
+                              width={30}
+                              height={30}
+                              className='rounded-full'
+                            />
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>{session?.user?.name || 'Joe'}</p>
+                          </TooltipContent>
+                        </Tooltip>
+                        <span className='h-9 px-4 py-2 has-[>svg]:px-3 border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 rounded-lg cursor-pointer '>   
+                          Sign Out
+                        </span>
+                      </div>
+                    ) : (
+                      'Add a job offers'
+                    )}
+                  </MenubarTrigger>
+                  <MenubarContent>
+                    {!session?.user &&
+                        <>
+                      <MenubarItem>
+                          <Button
+                            asChild
+                            variant='outline'
+                            size='sm'
+                            className={cn(isScrolled && 'lg:hidden')}
+                          >
+                            <Link href='/login'>
+                              <span>Login</span>
+                            </Link>
+                          </Button>
+                          <Button
+                            asChild
+                            size='sm'
+                            className={cn(isScrolled && 'lg:hidden')}
+                          >
+                            <Link href='/register'>
+                              <span>Sign Up</span>
+                            </Link>
+                          </Button>
+                          <Button
+                            asChild
+                            size='sm'
+                            className={cn(
+                              isScrolled ? 'lg:inline-flex' : 'hidden'
+                            )}
+                          >
+                            <Link href='/login'>
+                              <span>Get Started</span>
+                            </Link>
+                          </Button>
+                      </MenubarItem>
+                    <MenubarItem>
+                      <Button
+                        asChild
+                        size='sm'
+                        variant='outline'
+                      >
+                        <Link href='/price'>Price</Link>
+                      </Button>
+                    </MenubarItem>
+                        </>
+                    }
+                  </MenubarContent>
+                </MenubarMenu>
+              </Menubar>
 
-                    <Button
-                      variant={'destructive'}
-                      onClick={() => signOut()}
-                    >
-                      Sign Out
-                    </Button>
-                  </div>
-                ) : (
-                  <>
-                    <Button
-                      asChild
-                      variant='outline'
-                      size='sm'
-                      className={cn(isScrolled && 'lg:hidden')}
-                    >
-                      <Link href='/login'>
-                        <span>Login</span>
-                      </Link>
-                    </Button>
-                    <Button
-                      asChild
-                      size='sm'
-                      className={cn(isScrolled && 'lg:hidden')}
-                    >
-                      <Link href='/register'>
-                        <span>Sign Up</span>
-                      </Link>
-                    </Button>
-                    <Button
-                      asChild
-                      size='sm'
-                      className={cn(isScrolled ? 'lg:inline-flex' : 'hidden')}
-                    >
-                      <Link href='/login'>
-                        <span>Get Started</span>
-                      </Link>
-                    </Button>
-                  </>
-                )}
-                <ModeToggle />
-              </div>
+              <ModeToggle />
             </div>
           </div>
         </div>
