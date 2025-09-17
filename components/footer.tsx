@@ -8,6 +8,7 @@ const links = [
     { title: 'Browse Jobs', href: '/jobs' },
   { title: 'Post a Job', href: '/post-job' },
   { title: 'Dashboard', href: '/dashboard' },
+  { title: 'Price', href: '/price' },
   { title: 'About', href: '/about' },
 ]
 
@@ -26,7 +27,7 @@ export default function FooterSection() {
                                 key={link.title}
                                 href={link.href}
                                 className="text-muted-foreground hover:text-primary block duration-150">
-                                <span>{link.title}</span>
+                                {link.title}
                             </Link>
                         ))}
                     </div>

@@ -9,26 +9,14 @@ import ModeToggle from './mode-toggle'
 import { useSession } from 'next-auth/react'
 import { signOut } from 'next-auth/react'
 import Image from 'next/image'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/components/ui/tooltip'
 import { Logo } from './logo'
-import {
-  Menubar,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarTrigger,
-} from '@/components/ui/menubar'
+
 
 const menuItems = [
   { name: 'Browse Jobs', href: '/jobs' },
   { name: 'Post a Job', href: '/post-job' },
   { name: 'Dashboard', href: '/dashboard' },
+  { name: 'Price', href: '/price' },
   { name: 'About', href: '/about' },
 ]
 
@@ -114,15 +102,20 @@ export const HeroHeader = () => {
                   ))}
                 </ul>
               </div>
-              <Menubar>
-                <MenubarMenu>
-                  <MenubarTrigger onClick={() => signOut()}>
+              
                     {session?.user ? (
                       <div className='flex items-center gap-2'>
-                        
-                        <Tooltip>
-                          <TooltipTrigger>
-                            <Image
+                        <Button
+                            asChild
+                            variant='outline'
+                            size='sm'
+                            className={cn(isScrolled && 'lg:hidden')}
+                          >
+                            <Link href='/post-job'>
+                              Add a job offers
+                            </Link>
+                          </Button>
+                       <Image
                               src={
                                 session?.user?.image ||
                                 'https://randomuser.me/api/portraits/men/62.jpg'
@@ -132,23 +125,15 @@ export const HeroHeader = () => {
                               height={30}
                               className='rounded-full'
                             />
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p>{session?.user?.name || 'Joe'}</p>
-                          </TooltipContent>
-                        </Tooltip>
-                        <span className='h-9 px-4 py-2 has-[>svg]:px-3 border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 rounded-lg cursor-pointer '>   
+                        <Button
+                          onClick={() => signOut()}
+                          variant='outline'>
                           Sign Out
-                        </span>
+                        </Button>
                       </div>
-                    ) : (
-                      'Add a job offers'
-                    )}
-                  </MenubarTrigger>
-                  <MenubarContent>
-                    {!session?.user &&
-                        <>
-                      <MenubarItem>
+                    ) :(
+                      <>
+                        
                           <Button
                             asChild
                             variant='outline'
@@ -179,21 +164,11 @@ export const HeroHeader = () => {
                               <span>Get Started</span>
                             </Link>
                           </Button>
-                      </MenubarItem>
-                    <MenubarItem>
-                      <Button
-                        asChild
-                        size='sm'
-                        variant='outline'
-                      >
-                        <Link href='/price'>Price</Link>
-                      </Button>
-                    </MenubarItem>
-                        </>
-                    }
-                  </MenubarContent>
-                </MenubarMenu>
-              </Menubar>
+                        
+                        
+                      </>
+                    )}
+                  
 
               <ModeToggle />
             </div>

@@ -1,9 +1,14 @@
+'use client'
+
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Check } from 'lucide-react'
+import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 
 export default function Pricing() {
+    const router = useRouter()
     return (
         <section className="py-16 md:py-32">
             <div className="mx-auto max-w-7xl px-6">
@@ -24,9 +29,9 @@ export default function Pricing() {
                             <hr className="border-dashed" />
 
                             <ul className="list-outside space-y-3 text-sm">
-                                {['Ad valid for 7 days', '5GB Cloud Storage', 'Email and Chat Support'].map((item, index) => (
+                                {['Ad valid for 7 days', '5GB Cloud Storage', 'Email and Chat Support'].map((item) => (
                                     <li
-                                        key={index}
+                                        key={item}
                                         className="flex items-center gap-2">
                                         <Check className="size-3" />
                                         {item}
@@ -37,10 +42,12 @@ export default function Pricing() {
 
                         <CardFooter className="mt-auto">
                             <Button
-                                asChild
+                               onClick={() => {toast.success('Congratulations! You have a 7-day subscription.');
+                                 setTimeout(() => {router.push('/jobs')}, 2000);
+                               }}
                                 variant="outline"
                                 className="w-full">
-                                <Link href="">Get Started</Link>
+                               Get Started
                             </Button>
                         </CardFooter>
                     </Card>
@@ -58,9 +65,9 @@ export default function Pricing() {
                             <CardContent className="space-y-4">
                                 <hr className="border-dashed" />
                                 <ul className="list-outside space-y-3 text-sm">
-                                    {["Advertising valid for 30 days", "5 GB cloud storage", "Email and chat support", "Community forum access", "Single user access", "Mobile app access", "1 custom report per month", "Standard security features"].map((item, index) => (
+                                    {["Advertising valid for 30 days", "5 GB cloud storage", "Email and chat support", "Community forum access", "Single user access", "Mobile app access", "1 custom report per month", "Standard security features"].map((item) => (
                                         <li
-                                            key={index}
+                                            key={item}
                                             className="flex items-center gap-2">
                                             <Check className="size-3" />
                                             {item}
@@ -70,11 +77,14 @@ export default function Pricing() {
                             </CardContent>
 
                             <CardFooter>
-                                <Button
-                                    asChild
-                                    className="w-full mt-2">
-                                    <Link href="">Get Started</Link>
-                                </Button>
+                               <Button
+                               onClick={() => {toast.success('Congratulations! You have a 30-day subscription.');
+                                 setTimeout(() => {router.push('/jobs')}, 2000);
+                               }}
+                                variant="outline"
+                                className="w-full mt-2">
+                               Get Started
+                            </Button>
                             </CardFooter>
                         </div>
                     </Card>
@@ -90,9 +100,9 @@ export default function Pricing() {
                             <hr className="border-dashed" />
 
                             <ul className="list-outside space-y-3 text-sm">
-                                {["Advertisement valid for 3 months", "Everything in the Pro plan", "5 GB cloud storage", "Email and chat support"].map((item, index) => (
+                                {["Advertisement valid for 3 months", "Everything in the Pro plan", "5 GB cloud storage", "Email and chat support"].map((item) => (
                                     <li
-                                        key={index}
+                                        key={item}
                                         className="flex items-center gap-2">
                                         <Check className="size-3" />
                                         {item}
@@ -103,10 +113,12 @@ export default function Pricing() {
 
                         <CardFooter className="mt-auto">
                             <Button
-                                asChild
+                               onClick={() => {toast.success('Congratulations! You have a 3-month subscription.');
+                                 setTimeout(() => {router.push('/jobs')}, 2000);
+                               }}
                                 variant="outline"
                                 className="w-full">
-                                <Link href="">Get Started</Link>
+                               Get Started
                             </Button>
                         </CardFooter>
                     </Card>

@@ -10,6 +10,7 @@ const JobsPage = async ({searchParams,}: {searchParams: Promise<{ name: string }
   const jobs = 'jobs' in jobsResult && Array.isArray(jobsResult.jobs) ? jobsResult.jobs : [];
   return (
     <div className='flex min-h-screen flex-col items-center justify-between py-24 px-4 sm:px-8 lg:px-24'>
+       <h1 className='text-2xl font-bold mb-4'>Job Offers</h1>
       <SelectName query='name' />
        <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
