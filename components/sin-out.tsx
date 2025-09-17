@@ -1,12 +1,10 @@
 import { signOut } from '@/app/api/auth/auth'
-import React from 'react'
 import { Button } from './ui/button'
 
 const SignOutButton = () => {
   return (
     <form
       action={async () => {
-        
         await signOut()
       }}
     >

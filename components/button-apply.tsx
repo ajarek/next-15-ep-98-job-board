@@ -7,8 +7,11 @@ const ButtonApply = () => {
   const router = useRouter()
   return (
     <Button
-      onClick={() => {toast.success('Application submitted successfully!')
-        setTimeout(() => {router.push('/jobs')}, 2000);
+      onClick={() => {
+        toast.success('Application submitted successfully!')
+        setTimeout(() => {
+          router.push('/jobs')
+        }, 2000)
       }}
       className='w-full cursor-pointer'
     >

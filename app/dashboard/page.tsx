@@ -1,15 +1,7 @@
 import { auth } from '@/app/api/auth/auth'
 import { getJobs } from '@/lib/action'
 import { redirect } from 'next/navigation'
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { Card, CardFooter, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ArrowBigRight } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -29,21 +21,19 @@ const Dashboard = async () => {
       <div className='w-full  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-4  '>
         {jobsResult.jobs && Array.isArray(jobsResult.jobs) ? (
           jobsResult.jobs
-            .filter(
-              (job) => job.WhoPublished === session.user?.name
-            )
+            .filter((job) => job.WhoPublished === session.user?.name)
             .map((job) => (
               <Card
                 key={job._id}
                 className=''
               >
                 <CardHeader>
-                    <div className='flex items-center justify-between'>
-                  <CardTitle className='text-xl font-bold'>
-                    {job.PositionName}
-                  </CardTitle>
+                  <div className='flex items-center justify-between'>
+                    <CardTitle className='text-xl font-bold'>
+                      {job.PositionName}
+                    </CardTitle>
                     <DeleteJob jobId={job._id.toString()} />
-                    </div>
+                  </div>
                 </CardHeader>
                 <CardContent>
                   <p>{job.JobType}</p>

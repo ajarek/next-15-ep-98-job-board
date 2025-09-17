@@ -125,10 +125,16 @@ export const getJobById = async (id: string) => {
   }
 }
 
-
 export const postJob = async (formData: Jobs) => {
-  const {PositionName, JobType, Salary, JobDescription, Location,Published, WhoPublished} = formData
- 
+  const {
+    PositionName,
+    JobType,
+    Salary,
+    JobDescription,
+    Location,
+    Published,
+    WhoPublished,
+  } = formData
 
   try {
     await connectToDb()
@@ -143,11 +149,10 @@ export const postJob = async (formData: Jobs) => {
     })
     console.log(newJob)
     await newJob.save()
-    
+
     revalidatePath('/')
     return { status: 200 }
-  }
-  catch (err) {
+  } catch (err) {
     console.log(err)
   }
 }
@@ -158,7 +163,7 @@ export const deleteJob = async (formData: FormData) => {
   try {
     await connectToDb()
     await Jobs.findOneAndDelete({ _id: id })
-    
+
     revalidatePath('/dashboard')
     console.log({ message: `Deleted job ${id}` })
     return { message: `Deleted job ${id}` }

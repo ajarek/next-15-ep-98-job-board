@@ -1,14 +1,14 @@
-
-import Image from "next/image"
-
+import Image from 'next/image'
 
 export const Logo = () => {
-    return (
+  return (
     <div>
-        <Image src='/logo.png' alt="logo" width={57} height={40} />
+      <Image
+        src='/logo.png'
+        alt='logo'
+        width={57}
+        height={40}
+      />
     </div>
-    )
+  )
 }
-
-
-

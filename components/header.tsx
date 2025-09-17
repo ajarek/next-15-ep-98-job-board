@@ -11,7 +11,6 @@ import { signOut } from 'next-auth/react'
 import Image from 'next/image'
 import { Logo } from './logo'
 
-
 const menuItems = [
   { name: 'Browse Jobs', href: '/jobs' },
   { name: 'Post a Job', href: '/post-job' },
@@ -40,7 +39,7 @@ export const HeroHeader = () => {
       >
         <div
           className={cn(
-            'mx-auto mt-2 max-w-6xl px-6 transition-all duration-300 lg:px-12',
+            'mx-auto mt-2 max-w-7xl px-6 transition-all duration-300 lg:px-12',
             isScrolled &&
               'bg-background/50 max-w-4xl rounded-2xl border backdrop-blur-lg lg:px-5'
           )}
@@ -102,73 +101,66 @@ export const HeroHeader = () => {
                   ))}
                 </ul>
               </div>
-              
-                    {session?.user ? (
-                      <div className='flex items-center gap-2'>
-                        <Button
-                            asChild
-                            variant='outline'
-                            size='sm'
-                            className={cn(isScrolled && 'lg:hidden')}
-                          >
-                            <Link href='/post-job'>
-                              Add a job offers
-                            </Link>
-                          </Button>
-                       <Image
-                              src={
-                                session?.user?.image ||
-                                'https://randomuser.me/api/portraits/men/62.jpg'
-                              }
-                              alt={session?.user?.name || 'login'}
-                              width={30}
-                              height={30}
-                              className='rounded-full'
-                            />
-                        <Button
-                          onClick={() => signOut()}
-                          variant='outline'>
-                          Sign Out
-                        </Button>
-                      </div>
-                    ) :(
-                      <>
-                        
-                          <Button
-                            asChild
-                            variant='outline'
-                            size='sm'
-                            className={cn(isScrolled && 'lg:hidden')}
-                          >
-                            <Link href='/login'>
-                              <span>Login</span>
-                            </Link>
-                          </Button>
-                          <Button
-                            asChild
-                            size='sm'
-                            className={cn(isScrolled && 'lg:hidden')}
-                          >
-                            <Link href='/register'>
-                              <span>Sign Up</span>
-                            </Link>
-                          </Button>
-                          <Button
-                            asChild
-                            size='sm'
-                            className={cn(
-                              isScrolled ? 'lg:inline-flex' : 'hidden'
-                            )}
-                          >
-                            <Link href='/login'>
-                              <span>Get Started</span>
-                            </Link>
-                          </Button>
-                        
-                        
-                      </>
-                    )}
-                  
+
+              {session?.user ? (
+                <div className='flex items-center gap-2'>
+                  <Button
+                    asChild
+                    variant='outline'
+                    size='sm'
+                    className={cn(isScrolled && 'lg:hidden')}
+                  >
+                    <Link href='/post-job'>Add a job offers</Link>
+                  </Button>
+                  <Image
+                    src={
+                      session?.user?.image ||
+                      'https://randomuser.me/api/portraits/men/62.jpg'
+                    }
+                    alt={session?.user?.name || 'login'}
+                    width={30}
+                    height={30}
+                    className='rounded-full'
+                  />
+                  <Button
+                    onClick={() => signOut()}
+                    variant='outline'
+                  >
+                    Sign Out
+                  </Button>
+                </div>
+              ) : (
+                <>
+                  <Button
+                    asChild
+                    variant='outline'
+                    size='sm'
+                    className={cn(isScrolled && 'lg:hidden')}
+                  >
+                    <Link href='/login'>
+                      <span>Login</span>
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    size='sm'
+                    className={cn(isScrolled && 'lg:hidden')}
+                  >
+                    <Link href='/register'>
+                      <span>Sign Up</span>
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    size='sm'
+                    className={cn(isScrolled ? 'lg:inline-flex' : 'hidden')}
+                  >
+                    <Link href='/login'>
+                      <span>Get Started</span>
+                    </Link>
+                  </Button>
+                </>
+              )}
 
               <ModeToggle />
             </div>

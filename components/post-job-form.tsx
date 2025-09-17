@@ -18,10 +18,8 @@ import { Input } from '@/components/ui/input'
 import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
 
-
 const formSchema = z.object({
- PositionName: z.string().min(1, { message: 'PositionName is required'
-  }),
+  PositionName: z.string().min(1, { message: 'PositionName is required' }),
   JobType: z.string().min(1, 'JobType is required'),
   Salary: z.string().min(1, 'Salary is required'),
   JobDescription: z.string().min(1, 'JobDescription is required'),
@@ -42,32 +40,30 @@ const PostJobForm = () => {
   })
 
   const onSubmit = async (formData: z.infer<typeof formSchema>) => {
-      try {
-        const JobData = {
-          PositionName: formData.PositionName as string,
-          JobType: formData.JobType as string,
-          Salary: formData.Salary as string,
-          JobDescription: formData.JobDescription as string,
-          Location: formData.Location as string,
-          WhoPublished: session?.user?.name ?? '',
-          Published: new Date() as Date,
-        }
-  
-        await postJob(JobData)
-      } catch (error) {
-        console.error(error)
-      } finally {
-        redirect('/jobs')
+    try {
+      const JobData = {
+        PositionName: formData.PositionName as string,
+        JobType: formData.JobType as string,
+        Salary: formData.Salary as string,
+        JobDescription: formData.JobDescription as string,
+        Location: formData.Location as string,
+        WhoPublished: session?.user?.name ?? '',
+        Published: new Date() as Date,
       }
+
+      await postJob(JobData)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      redirect('/jobs')
     }
+  }
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className='space-y-4'
       >
-        
-        
         <FormField
           control={form.control}
           name='PositionName'
@@ -86,7 +82,7 @@ const PostJobForm = () => {
             </FormItem>
           )}
         />
-       
+
         <FormField
           control={form.control}
           name='JobType'
@@ -159,16 +155,14 @@ const PostJobForm = () => {
             </FormItem>
           )}
         />
-                
-           
+
         <Button
           type='submit'
           className='w-full cursor-pointer'
         >
-          Post Job
+          {status === 'loading' ? 'Posting Job...' : 'Post Job'}
         </Button>
       </form>
-      
     </Form>
   )
 }

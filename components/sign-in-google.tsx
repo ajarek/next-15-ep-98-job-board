@@ -14,7 +14,13 @@ export default function SignInGoogle() {
         type='submit'
         className='w-full cursor-pointer'
       >
-        <Image src='/google.png' alt='Google Logo' width={20} height={20} /> Sign in with Google
+        <Image
+          src='/google.png'
+          alt='Google Logo'
+          width={20}
+          height={20}
+        />{' '}
+        Sign in with Google
       </Button>
     </form>
   )

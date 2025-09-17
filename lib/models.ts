@@ -1,7 +1,6 @@
 import mongoose from 'mongoose'
 
 export type User = {
- 
   username: string
   email: string
   password: string
@@ -10,17 +9,15 @@ export type User = {
 }
 
 export type Jobs = {
- _id?: number,
-  PositionName: string,
-  JobType: string,
-  Salary: string,
-  JobDescription: string,
-  Location: string,
-  Published: Date,
+  _id?: number
+  PositionName: string
+  JobType: string
+  Salary: string
+  JobDescription: string
+  Location: string
+  Published: Date
   WhoPublished: string
 }
-
-
 
 const userSchema = new mongoose.Schema(
   {
@@ -48,5 +45,4 @@ const jobsSchema = new mongoose.Schema(
 
 export const User = mongoose.models?.User || mongoose.model('User', userSchema)
 
-export const Jobs =
-  mongoose.models?.Jobs || mongoose.model('Jobs', jobsSchema)
+export const Jobs = mongoose.models?.Jobs || mongoose.model('Jobs', jobsSchema)

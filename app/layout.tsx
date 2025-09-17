@@ -1,51 +1,55 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { HeroHeader } from "@/components/header";
-import { ThemeProvider } from "@/components/theme-provider";
-import { Toaster } from "@/components/ui/sonner"
-import ProvidersSession from "@/components/providers-session";
-import FooterSection from "@/components/footer";
+import type { Metadata } from 'next'
+import { Geist, Geist_Mono } from 'next/font/google'
+import './globals.css'
+import { HeroHeader } from '@/components/header'
+import { ThemeProvider } from '@/components/theme-provider'
+import { Toaster } from '@/components/ui/sonner'
+import ProvidersSession from '@/components/providers-session'
+import FooterSection from '@/components/footer'
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+})
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+})
 
 export const metadata: Metadata = {
-  title: "Job Board App",
-  description: "A simple job board application built with Next.js and TypeScript.",
-};
+  title: 'Job Board App',
+  description:
+    'A simple job board application built with Next.js and TypeScript.',
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang='en'
+      suppressHydrationWarning
+    >
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-         <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <ProvidersSession>
-              <HeroHeader />
-              {children}
-              <FooterSection />
-              <Toaster />
-            </ProvidersSession>
-          </ThemeProvider>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='dark'
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ProvidersSession>
+            <HeroHeader />
+            {children}
+            <FooterSection />
+            <Toaster />
+          </ProvidersSession>
+        </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }
