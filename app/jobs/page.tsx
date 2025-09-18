@@ -15,7 +15,7 @@ const JobsPage = async ({
       ? jobsResult.jobs
       : []
   return (
-    <div className='flex min-h-screen flex-col items-center justify-between py-24 px-4 sm:px-8 lg:px-24'>
+    <div className='flex min-h-screen flex-col items-center justify-between pt-24 px-4 sm:px-8 lg:px-24'>
       <h1 className='text-2xl font-bold mb-4'>Job Offers</h1>
       <SelectName query='name' />
       <motion.div

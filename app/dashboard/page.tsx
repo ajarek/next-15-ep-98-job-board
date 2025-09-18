@@ -16,7 +16,7 @@ const Dashboard = async () => {
   const jobsResult = await getJobs()
 
   return (
-    <div className='min-h-screen flex flex-col items-center justify-center py-24 px-4 sm:px-8 lg:px-24 '>
+    <div className='min-h-screen flex flex-col items-center justify-center pt-24 px-4 sm:px-8 lg:px-24 '>
       <h1 className='text-2xl font-bold'>Dashboard - Your ads</h1>
       <div className='w-full  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-4  '>
         {jobsResult.jobs && Array.isArray(jobsResult.jobs) ? (

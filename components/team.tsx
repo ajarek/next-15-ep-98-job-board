@@ -42,9 +42,9 @@ const members = [
 
 const TeamSection = () => {
   return (
-    <section className='bg-gray-50 py-4 md:py-8 dark:bg-transparent'>
+    <section className='bg-gray-50 dark:bg-transparent'>
       <div className='mx-auto max-w-5xl border-t px-6'>
-        <div className='mt-12 gap-4 sm:grid sm:grid-cols-2 md:mt-24'>
+        <div className=' gap-4 sm:grid sm:grid-cols-2 '>
           <div className='sm:w-2/5'>
             <h2 className='text-3xl font-bold sm:text-4xl'>Our dream team</h2>
           </div>

@@ -13,7 +13,6 @@ import { Logo } from './logo'
 
 const menuItems = [
   { name: 'Browse Jobs', href: '/jobs' },
-  { name: 'Post a Job', href: '/post-job' },
   { name: 'Dashboard', href: '/dashboard' },
   { name: 'Price', href: '/price' },
   { name: 'About', href: '/about' },

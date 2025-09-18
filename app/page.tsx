@@ -14,7 +14,7 @@ export default async function Home() {
       : []
   const jobsFilter = Jobs.slice(0, 6)
   return (
-    <main className='flex min-h-screen flex-col items-center justify-center p-24'>
+    <main className='flex min-h-screen flex-col items-center justify-center pt-16 px-4 lg:px-24 '>
       <HeroSection />
       <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
@@ -33,7 +33,7 @@ export default async function Home() {
         <Button
           asChild
           variant='link'
-          className='w-full text-blue-500'
+          className='w-full text-green-500'
         >
           <Link
             href={`/jobs`}

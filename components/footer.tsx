@@ -14,7 +14,7 @@ const links = [
 export default function FooterSection() {
   const { data: session, status } = useSession()
   return (
-    <footer className='border-b bg-white py-12 dark:bg-transparent'>
+    <div className='border-b bg-white py-8 dark:bg-transparent'>
       <div className='mx-auto max-w-5xl px-6'>
         <div className='flex flex-wrap justify-between gap-6'>
           <Link
@@ -42,6 +42,6 @@ export default function FooterSection() {
           </div>
         </div>
       </div>
-    </footer>
+    </div>
   )
 }
