@@ -23,8 +23,8 @@ export type AnimatedGroupProps = {
     item?: Variants
   }
   preset?: PresetType
-  as?: React.ElementType
-  asChild?: React.ElementType
+  as?: keyof React.JSX.IntrinsicElements | React.ComponentType<any>
+  asChild?: keyof React.JSX.IntrinsicElements | React.ComponentType<any>
 }
 
 const defaultContainerVariants: Variants = {
@@ -115,14 +115,8 @@ function AnimatedGroup({
   const containerVariants = variants?.container || selectedVariants.container
   const itemVariants = variants?.item || selectedVariants.item
 
-  const MotionComponent = React.useMemo(
-    () => motion.create(as as keyof JSX.IntrinsicElements),
-    [as]
-  )
-  const MotionChild = React.useMemo(
-    () => motion.create(asChild as keyof JSX.IntrinsicElements),
-    [asChild]
-  )
+  const MotionComponent = motion(as ?? 'div')
+  const MotionChild = motion(asChild ?? 'div')
 
   return (
     <MotionComponent
@@ -131,14 +125,20 @@ function AnimatedGroup({
       variants={containerVariants}
       className={className}
     >
-      {React.Children.map(children, (child, index) => (
-        <MotionChild
-          key={index}
-          variants={itemVariants}
-        >
-          {child}
-        </MotionChild>
-      ))}
+      {React.Children.map(children, (child) => {
+        const childKey =
+          (React.isValidElement(child) && child.key != null)
+            ? child.key
+            : undefined;
+        return (
+          <MotionChild
+            key={childKey}
+            variants={itemVariants}
+          >
+            {child}
+          </MotionChild>
+        );
+      })}
     </MotionComponent>
   )
 }
